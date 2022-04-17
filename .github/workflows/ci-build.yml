@@ -1,0 +1,30 @@
+name: Demo CI Pipeline
+on: [push]
+jobs:
+  Test App:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Initialize test db
+        uses: wordpress:cli-2.6.0-php7.4
+        run: wp db import build/ci-db.sql
+      - name: Validate app is running
+        run: curl -kv http://wp/
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: somewordpress
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+
+      wp:
+        image: wordpress:5.9.3-php7.4-apache
+        env:
+          WORDPRESS_DB_HOST: db
+          WORDPRESS_DB_USER: wordpress
+          WORDPRESS_DB_PASSWORD: wordpress
+          WORDPRESS_DB_NAME: wordpress
+
