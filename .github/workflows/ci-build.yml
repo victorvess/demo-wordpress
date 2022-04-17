@@ -2,6 +2,7 @@ name: Demo CI Pipeline
 on: [push]
 jobs:
   test_app:
+    name: Test App
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
