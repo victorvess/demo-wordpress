@@ -10,7 +10,8 @@ jobs:
       - name: Initialize test db
         uses: docker://wordpress:cli-2.6.0-php7.4
         with:
-          args: wp db import build/ci-db.sql
+          #args: wp db import build/ci-db.sql
+          args: ls /var/www/html
       - name: Validate app is running
         run: curl -kv http://wp/
     services:
