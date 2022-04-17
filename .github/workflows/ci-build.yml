@@ -12,4 +12,6 @@ jobs:
       - name: Wait for warmup
         run:  sleep 10
       - name: Initialize test db
-        run:  docker ps -a
+        run:  docker exec -it demo-wordpress_wp-cli_1 wp db import /build/ci-db.sql
+      - name: Test Site
+        run:  curl -kv http://localhost
