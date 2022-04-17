@@ -14,4 +14,4 @@ jobs:
       - name: Initialize test db
         run:  docker exec demo-wordpress_wp-cli_1 wp db import /build/ci-db.sql
       - name: Test Site
-        run:  curl -kv http://localhost
+        run:  curl --fail http://localhost | grep "Hello world"
